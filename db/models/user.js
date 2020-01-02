@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
             type: Sequelize.STRING,
             allowNull: false,
         },
-        email: {
+        emailAddress: {
             type: Sequelize.STRING,
             allowNull: false,
         },
@@ -27,7 +27,13 @@ module.exports = (sequelize) => {
         },
     }, { sequelize });
     User.associate = (models) => {
-        User.hasMany(models.Course);
+        User.hasMany(models.Course, {
+            as: 'user',
+            foreignKey: {
+                fieldName: 'userId',
+                allowNull: false
+            }
+        });
     };
 
     return User;

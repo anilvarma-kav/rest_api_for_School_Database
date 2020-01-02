@@ -3,6 +3,7 @@
 // load modules
 const express = require('express');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 const { sequelize, models } = require('./db');
 const { User, Course } = models;
 const courses = require('./routes/courses');
@@ -14,8 +15,14 @@ const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'tr
 const app = express();
 
 // setup morgan which gives us http request logging
-app.use(morgan('dev'));
 
+app.use(morgan('dev'));
+app.use(
+    bodyParser.urlencoded({
+        extended: true
+    })
+);
+app.use(bodyParser.json());
 // TODO setup your api routes here
 
 sequelize
