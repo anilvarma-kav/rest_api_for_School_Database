@@ -15,16 +15,18 @@ const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'tr
 const app = express();
 
 // setup morgan which gives us http request logging
-
 app.use(morgan('dev'));
+
+//Parse incoming bodies in a middleware before your handlers, available under
+// req.body property
 app.use(
     bodyParser.urlencoded({
         extended: true
     })
 );
 app.use(bodyParser.json());
-// TODO setup your api routes here
 
+// authenticate the connection to sqlite database
 sequelize
     .authenticate()
     .then(() => {
@@ -34,8 +36,9 @@ sequelize
       console.error("Database Connection unsuccessful:", err);
     });
 
+//sync all defined models to the DB
 sequelize
-    .sync({ force: true })
+    .sync({ force: false })
     .then(() =>{
       console.log("Synchronizing models");
     })
@@ -50,10 +53,10 @@ app.get('/', (req, res) => {
   });
 });
 
+// Setup route for users
 app.use('/api/users', users);
-
+//Setup route for courses
 app.use('/api/courses', courses);
-
 
 // send 404 if no other route matched
 app.use((req, res) => {

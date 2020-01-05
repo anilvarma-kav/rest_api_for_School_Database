@@ -18,7 +18,8 @@ function asyncHandler(cb) {
     };
 }
 
-/* GET home page. */
+// User Home route
+// authenticated route
 router.get('/', authenticateUser,(req, res) => {
     const {id, firstName, lastName, emailAddress} = req.currentUser;
     res.json({
@@ -29,6 +30,7 @@ router.get('/', authenticateUser,(req, res) => {
     });
 });
 
+// Create new user route
 router.post('/', [
     check('firstName')
         .exists({ checkNull: true, checkFalsy: true}).withMessage('Please provide a value for "first name"'),

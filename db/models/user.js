@@ -1,6 +1,6 @@
 'use strict';
 const Sequelize = require('sequelize');
-
+// User Model
 module.exports = (sequelize) => {
     class User extends Sequelize.Model {}
     User.init({
@@ -26,6 +26,8 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
     }, { sequelize });
+    //Associate User model with Course model
+    //which allows one user can create many courses
     User.associate = (models) => {
         User.hasMany(models.Course, {
             as: 'user',

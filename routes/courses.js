@@ -1,5 +1,5 @@
 'use strict';
-
+//load required modules
 var express = require('express');
 var router = express.Router();
 const {check, validationResult} = require('express-validator/check');
@@ -17,7 +17,7 @@ function asyncHandler(cb) {
         }
     };
 }
-    /* GET home page. */
+// courses home route to get all the courses
 router.get('/', asyncHandler(async (req, res) => {
     const courses = await Course.findAll({
         attributes: ["id", "title", "description", "userId", "estimatedTime", "materialsNeeded"],
@@ -35,6 +35,7 @@ router.get('/', asyncHandler(async (req, res) => {
     });
 }));
 
+//courses route to get only one course with "id"
 router.get('/:id', asyncHandler(async(req, res) => {
     const course = await Course.findByPk(req.params.id, {
         attributes: ["id", "title", "description", "userId", "estimatedTime", "materialsNeeded"],
@@ -58,6 +59,8 @@ router.get('/:id', asyncHandler(async(req, res) => {
     }
 }));
 
+// Route to create a new course
+// This is an authenticated route
 router.post('/',[
     check('title')
         .exists({ checkNull: true, checkFalsy: true}).withMessage('Please provide a value for "title"'),
@@ -94,6 +97,8 @@ router.post('/',[
     }
 }));
 
+//Route to update the course
+// This is an authenticated route
 
 router.put('/:id', [
     check('title')
@@ -140,7 +145,8 @@ router.put('/:id', [
 
 }));
 
-
+// Route to delete(id) course with given "id"
+// This is an authenticated route 
 router.delete('/:id', authenticateUser, asyncHandler(async (req, res) => {
 
     const course = await Course.findByPk(req.params.id);
