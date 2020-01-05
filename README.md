@@ -40,7 +40,7 @@ To test the Express server, browse to the URL [http://localhost:5000/](http://lo
 
 ## API Documentation
 
-[Click here](http://localhost:5000/) to see the API Documentation. 
+[Click here](https://documenter.getpostman.com/view/9971986/SWLe77oK?version=latest) to see the API Documentation. 
 
 ## Technologies Used:
 * REST API
