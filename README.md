@@ -4,7 +4,7 @@
 ## Project Overview
 The API will provide a way for users to administer a school database containing information about courses: users can interact with the database by retrieving a list of courses, as well as adding, updating and deleting courses in the database.
 
-* Hosted in Heroku [https://anil-school-courses-rest-api.herokuapp.com](https://anil-school-courses-rest-api.herokuapp.com)
+* Hosted in Heroku [https://anilvarma-school-api.herokuapp.com](https://anilvarma-school-api.herokuapp.com)
 
 ### Files: 
 
